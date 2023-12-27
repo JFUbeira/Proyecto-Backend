@@ -33,7 +33,6 @@ class ManagerUsuarios {
             const data = await fs.promises.readFile('./usuarios.json', 'utf-8')
             this.usuarios = JSON.parse(data)
 
-            // Muestra los usuarios en formato JSON
             console.log(JSON.stringify(this.usuarios, null, 2))
         } catch (error) {
             console.log(error)
@@ -57,9 +56,7 @@ async function ejecutar() {
     await managerUsuarios.crearUsuario('javier', 'garcia', 23, 'backend')
     await managerUsuarios.crearUsuario('maria', 'lopez', 22, 'frontend')
 
-    // Espera a que se lean los usuarios antes de mostrarlos
     await managerUsuarios.leerUsuarios()
 }
 
-// Llama a la función ejecutar para iniciar el proceso
 ejecutar()
