@@ -6,7 +6,7 @@ const hours = currentDate.getHours()
 const minutes = currentDate.getMinutes()
 
 // Puedes combinar estos valores en una cadena de fecha y hora
-const formattedDateTime = `${day}/${month}/${year} ${hours}:${minutes}`
+const formattedDateTime = `${day}/${month}/${year}, ${hours}:${minutes}`
 
 const fs = require('fs')
 
