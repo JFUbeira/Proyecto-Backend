@@ -1,1 +1,20 @@
-[{"nombre":"pedro","apellido":"perez","edad":20,"curso":"java"},{"nombre":"javier","apellido":"garcia","edad":23,"curso":"backend"},{"nombre":"maria","apellido":"lopez","edad":22,"curso":"frontend"}]
+[
+    {
+        "nombre": "pedro",
+        "apellido": "perez",
+        "edad": 20,
+        "curso": "java"
+    },
+    {
+        "nombre": "javier",
+        "apellido": "garcia",
+        "edad": 23,
+        "curso": "backend"
+    },
+    {
+        "nombre": "maria",
+        "apellido": "lopez",
+        "edad": 22,
+        "curso": "frontend"
+    }
+]
