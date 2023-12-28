@@ -15,7 +15,6 @@ for (let i = 0; i < amountOfNumbers; i++) {
 
 console.log(finalObject)
 
-
 // const min = 1
 // const max = 20
 // const amountOfNumbers = 1000
