@@ -1,5 +1,4 @@
-// const fs = require('fs').promises
-import { promises as fs } from 'fs' // o import fs from 'fs'
+import { promises as fs } from 'fs'
 
 class ProductManager {
     constructor() {
