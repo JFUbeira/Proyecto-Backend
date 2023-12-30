@@ -47,7 +47,6 @@ class ProductManager {
         try {
             const products = await this.readProducts()
             return products
-            console.log(products)
         } catch (error) {
             console.log(error)
         }
