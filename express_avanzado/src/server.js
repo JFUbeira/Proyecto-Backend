@@ -27,4 +27,16 @@ app.get('/api/palabras/:pos', (req, res) => {
     }
 })
 
+app.post('/api/palabras', (req, res) => {
+    const { palabra } = req.body
+
+    const position = 3
+    initialPhrase.splice(position, 0, palabra)
+
+    res.json({
+        agregada: palabra,
+        pos: position + 1
+    })
+})
+
 app.listen(8080)
