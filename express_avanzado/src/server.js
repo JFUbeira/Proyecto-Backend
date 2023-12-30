@@ -39,4 +39,14 @@ app.post('/api/palabras', (req, res) => {
     })
 })
 
+app.put('/api/palabras/:pos', (req, res) => {
+    const { pos } = req.params
+    const { palabra } = req.body
+    initialPhrase[parseInt(pos) - 1] = palabra
+    res.json({
+        actualizada: palabra,
+        anterior: initialPhrase[parseInt(pos) - 1]
+    })
+})
+
 app.listen(8080)
