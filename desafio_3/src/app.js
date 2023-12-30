@@ -30,7 +30,14 @@ app.get('/products/:pid', (req, res) => {
     const productManager = new ProductManager()
     productManager.getProductById(pid)
         .then(product => {
-            res.json(product)
+            if (!product) {
+                res.json({ error: 'Product not found' })
+            } else {
+                res.json(product)
+            }
+        })
+        .catch(error => {
+            console.log(error)
         })
 })
 
