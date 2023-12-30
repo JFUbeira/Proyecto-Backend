@@ -5,7 +5,6 @@ const app = express()
 const port = 8080
 
 app.get('/products', (req, res) => {
-
     const limit = req.query.limit
 
     if (!limit) {
@@ -24,6 +23,15 @@ app.get('/products', (req, res) => {
                 res.json(limitedProducts)
             })
     }
+})
+
+app.get('/products/:pid', (req, res) => {
+    const pid = req.params.pid
+    const productManager = new ProductManager()
+    productManager.getProductById(pid)
+        .then(product => {
+            res.json(product)
+        })
 })
 
 app.listen(port)

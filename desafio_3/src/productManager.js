@@ -55,11 +55,11 @@ class ProductManager {
     async getProductById(id) {
         try {
             const products = await this.readProducts()
-            const product = products.find((product) => product.id === id)
+            const product = products.find((product) => product.id == id)
             if (!product) {
                 console.log('Error: El producto no existe')
             } else {
-                console.log(product)
+                return product
             }
         }
         catch (error) {
