@@ -18,7 +18,7 @@ app.get('/api/palabras/:pos', (req, res) => {
     const searchedWord = initialPhrase[parseInt(pos) - 1]
     if (!searchedWord) {
         res.json({
-            error: 'Palabra no encontrada'
+            error: 'Word not found'
         })
     } else {
         res.json({
@@ -47,6 +47,18 @@ app.put('/api/palabras/:pos', (req, res) => {
         actualizada: palabra,
         anterior: initialPhrase[parseInt(pos) - 1]
     })
+})
+
+app.delete('/api/palabras/:pos', (req, res) => {
+    const { pos } = req.params
+
+    if (!pos) {
+        return res.json({
+            error: 'Word not found'
+        })
+    } else {
+        initialPhrase.splice(pos, 1)
+    }
 })
 
 app.listen(8080)
