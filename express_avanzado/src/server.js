@@ -42,10 +42,11 @@ app.post('/api/palabras', (req, res) => {
 app.put('/api/palabras/:pos', (req, res) => {
     const { pos } = req.params
     const { palabra } = req.body
+    const previousWord = initialPhrase[parseInt(pos) - 1]
     initialPhrase[parseInt(pos) - 1] = palabra
     res.json({
         actualizada: palabra,
-        anterior: initialPhrase[parseInt(pos) - 1]
+        anterior: previousWord
     })
 })
 
@@ -57,7 +58,10 @@ app.delete('/api/palabras/:pos', (req, res) => {
             error: 'Word not found'
         })
     } else {
-        initialPhrase.splice(pos, 1)
+        initialPhrase.splice(parseInt(pos) - 1, 1)
+        res.json({
+            status: `Deleted word in position ${pos}`
+        })
     }
 })
 
