@@ -3,7 +3,7 @@ import ProductManager from "../productManager.js"
 
 const router = Router()
 
-app.get('/api/products', (req, res) => {
+router.get('/', (req, res) => {
     const limit = req.query.limit
 
     if (!limit) {
@@ -23,3 +23,5 @@ app.get('/api/products', (req, res) => {
             })
     }
 })
+
+export default router
