@@ -52,4 +52,17 @@ router.post('/', (req, res) => {
         })
 })
 
+router.put('/:pid', (req, res) => {
+    const pid = req.params.pid
+    const updatedProduct = req.body
+    const productManager = new ProductManager()
+    productManager.updateProduct(pid, updatedProduct)
+        .then(() => {
+            res.json({ status: 'success', message: 'Product updated successfully' })
+        })
+        .catch(error => {
+            console.log(error)
+        })
+})
+
 export default router

@@ -62,22 +62,25 @@ class ProductManager {
             console.log(error)
         }
     }
-
-    async updateProduct(id, updatedProduct) {
+    async updateProduct(pid, updatedProduct) {
         try {
             const products = await this.readProducts();
-            const productIndex = products.findIndex((product) => product.id === id);
+            const productIndex = products.findIndex((product) => product.id === Number(pid));
+
             if (productIndex === -1) {
                 console.log('Error: El producto no existe');
             } else {
-                const updatedProductWithId = { ...updatedProduct, id: products[productIndex].id };
-                products.splice(productIndex, 1, updatedProductWithId);
+                const originalProduct = products[productIndex];
+                const updatedFields = { ...originalProduct, ...updatedProduct, id: originalProduct.id };
+
+                products.splice(productIndex, 1, updatedFields);
                 await this.writeProducts(products);
             }
         } catch (error) {
             console.log(error);
         }
     }
+
 
     async deleteProduct(id) {
         try {
