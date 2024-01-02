@@ -14,4 +14,16 @@ router.post("/", (req, res) => {
         })
 })
 
+router.get("/:cid", (req, res) => {
+    const cid = req.params.cid
+    const cartManager = new CartManager()
+    cartManager.getCartProducts(cid)
+        .then(products => {
+            res.json(products)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+})
+
 export default router

@@ -19,15 +19,6 @@ class CartManager {
         await fs.writeFile(this.path, data)
     }
 
-    async createCart() {
-        const cart = new Cart()
-        const carts = await this.getCarts()
-        cart.id = carts.length + 1
-        carts.push(cart)
-        await this.writeCarts(carts)
-        return cart
-    }
-
     async getCarts() {
         try {
             const carts = await this.readCarts()
@@ -37,6 +28,28 @@ class CartManager {
         }
     }
 
+    async createCart() {
+        const cart = new Cart()
+        const carts = await this.getCarts()
+        cart.id = carts.length + 1
+        carts.push(cart)
+        await this.writeCarts(carts)
+        return cart
+    }
+
+    async getCartProducts(id) {
+        try {
+            const carts = await this.readCarts()
+            const cart = carts.find(cart => cart.id == id)
+            if (!cart) {
+                console.log('Error: El carrito no existe')
+            } else {
+                return cart.products
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 class Cart {
