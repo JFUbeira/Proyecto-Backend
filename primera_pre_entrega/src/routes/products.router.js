@@ -24,4 +24,20 @@ router.get('/', (req, res) => {
     }
 })
 
+router.get('/:pid', (req, res) => {
+    const pid = req.params.pid
+    const productManager = new ProductManager()
+    productManager.getProductById(pid)
+        .then(product => {
+            if (!product) {
+                res.json({ error: 'Product not found' })
+            } else {
+                res.json(product)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+})
+
 export default router
