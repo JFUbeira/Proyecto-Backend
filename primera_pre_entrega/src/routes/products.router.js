@@ -40,4 +40,16 @@ router.get('/:pid', (req, res) => {
         })
 })
 
+router.post('/', (req, res) => {
+    const product = req.body
+    const productManager = new ProductManager()
+    productManager.addProduct(product)
+        .then(() => {
+            res.json({ status: 'success', message: 'Product added successfully' })
+        })
+        .catch(error => {
+            console.log(error)
+        })
+})
+
 export default router

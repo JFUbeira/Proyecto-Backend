@@ -18,27 +18,24 @@ class ProductManager {
         const data = JSON.stringify(products)
         await fs.writeFile(this.path, data)
     }
-
-    async addProduct(title, description, price, thumbnail, code, stock) {
+    async addProduct(product) {
         try {
-            const products = await this.readProducts()
-            if (!title || !description || !price || !thumbnail || !code || !stock) {
-                console.log('Error: Todos los campos son obligatorios')
-            }
+            const { title, description, price, thumbnail, code, stock, category } = product;
+            const products = await this.readProducts();
 
-            else if (products.find((product) => product.code === code)) {
-                console.log('Error: El código del producto ya existe')
+            if (!title || !description || !price || !thumbnail || !code || !stock || !category) {
+                console.log('Error: Todos los campos son obligatorios');
+            } else if (products.find((product) => product.code === code)) {
+                console.log('Error: El código del producto ya existe');
+            } else {
+                const newProduct = new Product(title, description, price, thumbnail, code, stock, category);
+                const lastProduct = products[products.length - 1];
+                newProduct.id = lastProduct ? lastProduct.id + 1 : 1;
+                products.push(newProduct);
+                await this.writeProducts(products);
             }
-
-            else {
-                const newProduct = new Product(title, description, price, thumbnail, code, stock)
-                newProduct.id = products.length + 1
-                products.push(newProduct)
-                await this.writeProducts(products)
-            }
-        }
-        catch (error) {
-            console.log(error)
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -100,13 +97,15 @@ class ProductManager {
 }
 
 class Product {
-    constructor(title, description, price, thumbnail, code, stock) {
+    constructor(title, description, price, thumbnail, code, stock, category) {
         this.title = title
         this.description = description
-        this.price = price
-        this.thumbnail = thumbnail
         this.code = code
+        this.price = price
+        this.category = category
         this.stock = stock
+        this.thumbnail = thumbnail
+        this.status = true
     }
 }
 
