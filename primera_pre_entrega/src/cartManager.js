@@ -1,4 +1,5 @@
 import { promises as fs } from 'fs'
+import ProductManager from './productManager.js'
 
 class CartManager {
     constructor() {
@@ -48,6 +49,47 @@ class CartManager {
             }
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    async addProductToCart(cid, pid) {
+        try {
+            const carts = await this.readCarts()
+            const cart = carts.find((cart) => cart.id == cid)
+
+            if (!cart) {
+                console.log('Error: El carrito no existe')
+            } else {
+                const productExists = cart.products.find((product) => product.product === pid)
+
+                if (productExists) {
+                    productExists.quantity++
+                } else {
+                    cart.products.push({ product: pid, quantity: 1 })
+                }
+
+                await this.writeCarts(carts)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async checkIfProductExists(pid) {
+        try {
+            const productManager = new ProductManager();
+            const products = await productManager.readProducts();
+            const productIndex = products.findIndex((product) => product.id === Number(pid));
+
+            if (productIndex === -1) {
+                console.log('Error: El producto no existe');
+                return false;
+            } else {
+                return true;
+            }
+        } catch (error) {
+            console.log(error);
+            return false;
         }
     }
 }
