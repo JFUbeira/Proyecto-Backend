@@ -85,7 +85,7 @@ class ProductManager {
     async deleteProduct(id) {
         try {
             const products = await this.readProducts()
-            const product = products.find((product) => product.id === id)
+            const product = products.find((product) => product.id === Number(id))
             if (!product) {
                 console.log('Error: El producto no existe')
             } else {
