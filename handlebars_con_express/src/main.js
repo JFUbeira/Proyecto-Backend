@@ -1,7 +1,7 @@
 import express from 'express'
 import handlebars from 'express-handlebars'
 import __dirname from './utils.js'
-import formRouter from './routes/form.routes.js'
+import formRouter from './routes/register.routes.js'
 
 const app = express()
 const port = 8080
