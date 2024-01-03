@@ -1,6 +1,7 @@
 import express from 'express'
 import handlebars from 'express-handlebars'
 import __dirname from './utils.js'
+import viewRouter from './routes/views.router.js'
 
 const app = express()
 const port = 8080
