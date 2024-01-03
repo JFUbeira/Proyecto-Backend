@@ -41,10 +41,10 @@ const users = [
 ]
 
 router.get('/', (req, res) => {
-    const randomIndex = Math.floor(Math.random() * users.length)
-    const randomUser = users[randomIndex]
-    res.render('index', { user: randomUser })
-})
+    const randomIndex = Math.floor(Math.random() * users.length);
+    const randomUser = users[randomIndex];
+    res.render('index', randomUser);
+});
 
 export default router
 
