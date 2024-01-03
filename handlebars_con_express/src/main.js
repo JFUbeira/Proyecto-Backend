@@ -1,0 +1,30 @@
+import express from 'express'
+import handlebars from 'express-handlebars'
+import __dirname from './utils.js'
+import formRouter from './routes/form.routes.js'
+
+const app = express()
+const port = 8080
+
+// Middlewares
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+
+// Engine setup
+app.engine('hbs', handlebars.engine({
+    extname: 'hbs',
+    defaultLayout: 'main'
+}))
+
+// Set views
+app.set('view engine', 'hbs')
+app.set('views', `${__dirname}/views`)
+
+// Public folder
+app.use(express.static(`${__dirname}/public`))
+
+// Routes
+app.use('/', formRouter)
+
+app.listen(port, () => console.log(`Server running on port ${port}`))
