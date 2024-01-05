@@ -2,12 +2,20 @@ import express from 'express'
 import handlebars from 'express-handlebars'
 import __dirname from './utils.js'
 
+import { Server } from 'socket.io'
+
 import productRouter from './routes/products.router.js'
 import cartRouter from './routes/carts.router.js'
 import homeRouter from './routes/home.router.js'
+import ProductManager from './productManager.js'
 
 const app = express()
 const port = 8080
+const httpServer = app.listen(port, () => {
+    console.log(`Server listening on port ${port}`)
+})
+
+const socketServer = new Server(httpServer)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -26,5 +34,13 @@ app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
 app.use('/', homeRouter)
 
+const productManager = new ProductManager()
+const products = await productManager.getProducts()
 
-app.listen(port)
+socketClient.on('formData', (data) => {
+    console.log(data)
+    productManager.addProduct(data.title, data.description, data.price, data.thumbnail, data.code, data.stock)
+    socketClient.emit('products', products)
+})
+
+socketClient.emit('products', products)
