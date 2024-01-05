@@ -1,0 +1,112 @@
+[
+    {
+        "title": "Producto 1",
+        "description": "Descripción del producto 1",
+        "code": 1234,
+        "price": 27,
+        "category": "winter",
+        "stock": 86,
+        "thumbnail": "sin imagen",
+        "status": true,
+        "id": 1
+    },
+    {
+        "title": "Producto 2",
+        "description": "Descripción del producto 2",
+        "code": 5678,
+        "price": 72,
+        "category": "winter",
+        "stock": 54,
+        "thumbnail": "sin imagen",
+        "status": true,
+        "id": 2
+    },
+    {
+        "title": "Producto 3",
+        "description": "Descripción del producto 3",
+        "code": 9012,
+        "price": 41,
+        "category": "winter",
+        "stock": 12,
+        "thumbnail": "sin imagen",
+        "status": true,
+        "id": 3
+    },
+    {
+        "title": "Producto 4",
+        "description": "Descripción del producto 4",
+        "code": 3456,
+        "price": 55,
+        "category": "winter",
+        "stock": 73,
+        "thumbnail": "sin imagen",
+        "status": true,
+        "id": 4
+    },
+    {
+        "title": "Producto 5",
+        "description": "Descripción del producto 5",
+        "code": 7890,
+        "price": 16,
+        "category": "winter",
+        "stock": 32,
+        "thumbnail": "sin imagen",
+        "status": true,
+        "id": 5
+    },
+    {
+        "title": "Producto 6",
+        "description": "Descripción del producto 6",
+        "code": 2345,
+        "price": 92,
+        "category": "winter",
+        "stock": 67,
+        "thumbnail": "sin imagen",
+        "status": true,
+        "id": 6
+    },
+    {
+        "title": "Producto 7",
+        "description": "Descripción del producto 7",
+        "code": 6789,
+        "price": 19,
+        "category": "winter",
+        "stock": 89,
+        "thumbnail": "sin imagen",
+        "status": true,
+        "id": 7
+    },
+    {
+        "title": "Producto 8",
+        "description": "Descripción del producto 8",
+        "code": 3123,
+        "price": 43,
+        "category": "winter",
+        "stock": 45,
+        "thumbnail": "sin imagen",
+        "status": true,
+        "id": 8
+    },
+    {
+        "title": "Producto 9",
+        "description": "Descripción del producto 9",
+        "code": 4567,
+        "price": 69,
+        "category": "winter",
+        "stock": 21,
+        "thumbnail": "sin imagen",
+        "status": true,
+        "id": 9
+    },
+    {
+        "title": "Producto 10",
+        "description": "Descripción del producto 10",
+        "code": 8901,
+        "price": 88,
+        "category": "winter",
+        "stock": 97,
+        "thumbnail": "sin imagen",
+        "status": true,
+        "id": 10
+    }
+]
