@@ -1,0 +1,82 @@
+/* Estilos para realTimeProducts.hbs */
+
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto; /* Agregado para centrar el formulario */
+    margin-bottom: 20px;
+}
+
+input[type='text'],
+input[type='number'] {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #4d4d4d;
+}
+
+input[type='submit'] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* Estilos para home.hbs */
+
+.product-list {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+.product-item {
+    margin-bottom: 20px;
+    border: 1px solid #4d4d4d;
+    padding: 10px;
+    background-color: #2c2c2c;
+}
+
+.product-name {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.product-description {
+    margin-bottom: 10px;
+    color: #b3b3b3;
+}
+
+.product-stock {
+    font-style: italic;
+    color: #b3b3b3;
+}
+
+.product-price {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.currency {
+    font-weight: normal;
+    color: #b3b3b3;
+}

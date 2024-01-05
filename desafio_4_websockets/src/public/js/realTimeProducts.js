@@ -33,5 +33,5 @@ button.addEventListener('click', (evt) => {
         category: category.value
     }
 
-    socketClient.emit('product', product)
+    socketClient.emit('formData', product)
 })

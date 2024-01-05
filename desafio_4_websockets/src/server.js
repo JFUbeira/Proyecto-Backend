@@ -48,7 +48,7 @@ socketServer.on("connection", (socketClient) => {
 
     socketClient.on('formData', (data) => {
         console.log(data)
-        productManager.addProduct(data.title, data.description, data.price, data.thumbnail, data.code, data.stock)
+        productManager.addProduct(data)
         socketClient.emit('products', products)
     })
 
