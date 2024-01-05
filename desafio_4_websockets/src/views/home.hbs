@@ -1,0 +1,15 @@
+<div class='product-list'>
+    <h1>Lista de Productos</h1>
+    <ul>
+        {{#each products}}
+            <li class='product-item'>
+                <div class='product-name'>{{name}}</div>
+                <div class='product-description'>{{description}}</div>
+                <div class='product-stock'>Stock: {{stock}}</div>
+                <div class='product-price'>
+                    <span class='currency'>$</span>{{price}}
+                </div>
+            </li>
+        {{/each}}
+    </ul>
+</div>
