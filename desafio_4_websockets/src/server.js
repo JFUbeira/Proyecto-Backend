@@ -7,6 +7,7 @@ import { Server } from 'socket.io'
 import productRouter from './routes/products.router.js'
 import cartRouter from './routes/carts.router.js'
 import homeRouter from './routes/home.router.js'
+import RealTimeProducts from './routes/realTimeProducts.router.js'
 import ProductManager from './productManager.js'
 
 const app = express()
@@ -33,14 +34,23 @@ app.use(express.static(`${__dirname}/public`))
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
 app.use('/', homeRouter)
+app.use('/realTimeProducts', RealTimeProducts)
 
 const productManager = new ProductManager()
 const products = await productManager.getProducts()
 
-socketClient.on('formData', (data) => {
-    console.log(data)
-    productManager.addProduct(data.title, data.description, data.price, data.thumbnail, data.code, data.stock)
+socketServer.on("connection", (socketClient) => {
+    console.log("Nuevo cliente conectado")
+
+    socketClient.on("message", (data) => {
+        console.log(data)
+    })
+
+    socketClient.on('formData', (data) => {
+        console.log(data)
+        productManager.addProduct(data.title, data.description, data.price, data.thumbnail, data.code, data.stock)
+        socketClient.emit('products', products)
+    })
+
     socketClient.emit('products', products)
 })
-
-socketClient.emit('products', products)
