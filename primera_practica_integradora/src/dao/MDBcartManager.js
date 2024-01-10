@@ -1,14 +1,14 @@
-import { cartModel } from './cartModel.js';
-import ProductManager from './FSproductManager.js';
+import { cartModel } from './models/cart.model.js'
+import ProductManager from './MDBproductManager.js'
 
 class CartManager {
     async readCarts() {
         try {
-            const carts = await cartModel.find();
-            return carts;
+            const carts = await cartModel.find()
+            return carts
         } catch (error) {
-            console.log(error);
-            return [];
+            console.log(error)
+            return []
         }
     }
 
