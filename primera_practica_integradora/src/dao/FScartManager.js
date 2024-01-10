@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs'
-import ProductManager from './productManager.js'
+import ProductManager from './FSproductManager.js'
 
 class CartManager {
     constructor() {
