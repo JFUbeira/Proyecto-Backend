@@ -13,6 +13,31 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+mongoose
+    .connect(
+        `mongodb+srv://JFUbeira:${password}@node-js.mkfobxo.mongodb.net/${db_name}?retryWrites=true&w=majority`
+    )
+    .then(() => {
+        console.log("DB Connected");
+    })
+    .catch((err) => {
+        console.log("Hubo un error");
+        console.log(err);
+    });
+
+app.engine(
+    "hbs",
+    handlebars.engine({
+        extname: ".hbs",
+        defaultLayout: "main",
+    })
+)
+
+app.set("view engine", "hbs")
+app.set("views", __dirname + "/views")
+
+app.use(express.static(__dirname + "/public"))
+
 // app.use('/api/products', productRouter)
 // app.use('/api/carts', cartRouter)
 app.use('/', viewsRouter)
