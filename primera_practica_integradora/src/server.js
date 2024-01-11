@@ -4,11 +4,19 @@ import handlebars from "express-handlebars"
 import viewsRouter from './routes/views.router.js'
 import { password, PORT, db_name } from "./env.js"
 import mongoose from "mongoose"
+import { Server } from "socket.io"
+import { messageModel } from './dao/models/message.model.js'
 
 // import productRouter from './routes/products.router.js'
 // import cartRouter from './routes/carts.router.js'
 
 const app = express()
+
+const httpServer = app.listen(PORT, () =>
+    console.log(`Server running on port ${PORT}`)
+)
+
+const io = new Server(httpServer)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -25,6 +33,7 @@ mongoose
         console.log(err);
     });
 
+// Configuracion Handlebars
 app.engine(
     "hbs",
     handlebars.engine({
@@ -42,6 +51,43 @@ app.use(express.static(__dirname + "/public"))
 // app.use('/api/carts', cartRouter)
 app.use('/', viewsRouter)
 
+const messages = []
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+io.on("connection", (socket) => {
+    console.log("Nuevo usuario conectado")
+
+    // Cargar mensajes desde MongoDB al conectarse un nuevo usuario
+    messageModel.find({}, (err, messages) => {
+        if (err) {
+            console.error("Error al cargar mensajes desde MongoDB:", err)
+        } else {
+            socket.emit("messages", messages)
+        }
+    })
+
+    socket.on("message", (data) => {
+        console.log(data)
+
+        // Guardar el mensaje en MongoDB
+        const newMessage = new messageModel(data)
+        newMessage.save((err) => {
+            if (err) {
+                console.error("Error al guardar mensaje en MongoDB:", err)
+            } else {
+                // Emitir el mensaje a todos los clientes conectados
+                io.emit("messages", [data])
+            }
+        });
+    });
+
+    socket.on("inicio", (data) => {
+        // Emitir mensajes a todos los clientes conectados
+        io.emit("messages", messages)
+
+        // Emitir evento 'connected' al resto de los clientes
+        socket.broadcast.emit("connected", data)
+    })
+})
+
+
 

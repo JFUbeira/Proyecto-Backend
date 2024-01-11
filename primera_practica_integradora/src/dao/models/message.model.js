@@ -6,7 +6,11 @@ const messageSchema = new Schema({
     },
     message: {
         type: String,
-    }
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now,
+    },
 })
 
 const messageModel = model('Message', messageSchema)

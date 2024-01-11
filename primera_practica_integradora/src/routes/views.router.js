@@ -119,6 +119,10 @@ router.post("/api/carts/:cid/product/:pid", async (req, res) => {
         console.log(error)
         res.status(500).json({ status: 'error', message: 'Internal Server Error' })
     }
-});
+})
+
+router.get('/chat', (req, res) => {
+    res.render("chat", {})
+})
 
 export default router
