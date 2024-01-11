@@ -26,6 +26,7 @@ Swal.fire({
     allowOutsideClick: false,
 }).then((result) => {
     if (result.isConfirmed) {
+
         user = result.value.username;
         email = result.value.email;
         socket.emit("inicio", { user, email });
@@ -36,6 +37,7 @@ chatbox.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
         socket.emit("message", {
             user,
+            email,
             message: e.target.value,
         });
         chatbox.value = ""

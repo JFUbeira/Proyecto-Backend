@@ -70,8 +70,10 @@ io.on("connection", async (socket) => {
         console.log(data);
 
         try {
+            const { user, email, message } = data
+
             // Guardar el mensaje en MongoDB
-            const newMessage = new messageModel(data);
+            const newMessage = new messageModel({ user, email, message })
             await newMessage.save();
 
             // Obtener todos los mensajes almacenados en MongoDB
@@ -87,7 +89,7 @@ io.on("connection", async (socket) => {
 
     socket.on("inicio", (data) => {
         // Emitir evento 'connected' al resto de los clientes
-        socket.broadcast.emit("connected", data);
+        socket.broadcast.emit("connected", data.user);
     });
 });
 
