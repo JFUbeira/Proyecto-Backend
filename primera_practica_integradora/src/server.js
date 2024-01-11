@@ -53,41 +53,44 @@ app.use('/', viewsRouter)
 
 const messages = []
 
-io.on("connection", (socket) => {
-    console.log("Nuevo usuario conectado")
+io.on("connection", async (socket) => {
+    console.log("Nuevo usuario conectado");
 
-    // Cargar mensajes desde MongoDB al conectarse un nuevo usuario
-    messageModel.find({}, (err, messages) => {
-        if (err) {
-            console.error("Error al cargar mensajes desde MongoDB:", err)
-        } else {
-            socket.emit("messages", messages)
-        }
-    })
+    try {
+        // Cargar mensajes desde MongoDB al conectarse un nuevo usuario
+        const messages = await messageModel.find({}).lean();
+
+        // Emitir mensajes al usuario recién conectado
+        socket.emit("messages", messages);
+    } catch (error) {
+        console.error("Error al cargar mensajes desde MongoDB:", error);
+    }
 
     socket.on("message", (data) => {
-        console.log(data)
+        console.log(data);
 
         // Guardar el mensaje en MongoDB
-        const newMessage = new messageModel(data)
-        newMessage.save((err) => {
-            if (err) {
-                console.error("Error al guardar mensaje en MongoDB:", err)
-            } else {
+        const newMessage = new messageModel(data);
+        newMessage.save()
+            .then(() => {
                 // Emitir el mensaje a todos los clientes conectados
-                io.emit("messages", [data])
-            }
-        });
+                io.emit("messages", [data]);
+            })
+            .catch((error) => {
+                console.error("Error al guardar mensaje en MongoDB:", error);
+            });
     });
 
     socket.on("inicio", (data) => {
         // Emitir mensajes a todos los clientes conectados
-        io.emit("messages", messages)
+        io.emit("messages", messages);
 
         // Emitir evento 'connected' al resto de los clientes
-        socket.broadcast.emit("connected", data)
-    })
-})
+        socket.broadcast.emit("connected", data);
+    });
+});
+
+
 
 
 
