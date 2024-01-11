@@ -58,33 +58,34 @@ io.on("connection", async (socket) => {
 
     try {
         // Cargar mensajes desde MongoDB al conectarse un nuevo usuario
-        const messages = await messageModel.find({}).lean();
+        const storedMessages = await messageModel.find({}).lean();
 
         // Emitir mensajes al usuario recién conectado
-        socket.emit("messages", messages);
+        socket.emit("messages", storedMessages);
     } catch (error) {
         console.error("Error al cargar mensajes desde MongoDB:", error);
     }
 
-    socket.on("message", (data) => {
+    socket.on("message", async (data) => {
         console.log(data);
 
-        // Guardar el mensaje en MongoDB
-        const newMessage = new messageModel(data);
-        newMessage.save()
-            .then(() => {
-                // Emitir el mensaje a todos los clientes conectados
-                io.emit("messages", [data]);
-            })
-            .catch((error) => {
-                console.error("Error al guardar mensaje en MongoDB:", error);
-            });
+        try {
+            // Guardar el mensaje en MongoDB
+            const newMessage = new messageModel(data);
+            await newMessage.save();
+
+            // Obtener todos los mensajes almacenados en MongoDB
+            const storedMessages = await messageModel.find({}).lean();
+
+            // Emitir todos los mensajes a todos los clientes conectados
+            io.emit("messages", storedMessages);
+        } catch (error) {
+            console.error("Error al procesar y enviar mensajes:", error);
+        }
     });
 
-    socket.on("inicio", (data) => {
-        // Emitir mensajes a todos los clientes conectados
-        io.emit("messages", messages);
 
+    socket.on("inicio", (data) => {
         // Emitir evento 'connected' al resto de los clientes
         socket.broadcast.emit("connected", data);
     });

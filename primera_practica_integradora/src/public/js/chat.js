@@ -5,15 +5,31 @@ let user
 
 Swal.fire({
     title: "Bienvenido",
-    text: "Ingrese su nombre para continuar",
-    input: "text",
-    inputValidator: (value) => {
-        return !value && "Necesitás identificarte"
+    html: `
+        <input type="text" id="username" class="swal2-input" placeholder="Nombre de Usuario" required>
+        <input type="email" id="email" class="swal2-input" placeholder="Correo Electrónico" required>
+    `,
+    inputAttributes: {
+        autocapitalize: 'off',
+    },
+    preConfirm: () => {
+        return {
+            username: document.getElementById('username').value,
+            email: document.getElementById('email').value,
+        };
+    },
+    inputValidator: (result) => {
+        if (!result.username || !result.email) {
+            return 'Ambos campos son obligatorios';
+        }
     },
     allowOutsideClick: false,
-}).then((value) => {
-    user = value.value;
-    socket.emit("inicio", user)
+}).then((result) => {
+    if (result.isConfirmed) {
+        user = result.value.username;
+        email = result.value.email;
+        socket.emit("inicio", { user, email });
+    }
 });
 
 chatbox.addEventListener("keyup", (e) => {

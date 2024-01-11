@@ -4,6 +4,9 @@ const messageSchema = new Schema({
     user: {
         type: String,
     },
+    email: {
+        type: String,
+    },
     message: {
         type: String,
     },
