@@ -63,7 +63,7 @@ class CartManager {
             if (!cart) {
                 console.log('Error: El carrito no existe');
             } else {
-                const productIndex = cart.products.findIndex((product) => product.product.equals(pid));
+                const productIndex = cart.products.findIndex((product) => product.product.toString() === pid);
 
                 if (productIndex !== -1) {
                     cart.products[productIndex].quantity++;
@@ -78,11 +78,12 @@ class CartManager {
         }
     }
 
+
     async checkIfProductExists(pid) {
         try {
             const productManager = new ProductManager();
             const products = await productManager.readProducts();
-            return products.some((product) => product.id === Number(pid));
+            return products.some((product) => product.id == pid)
         } catch (error) {
             console.log(error);
             return false;
