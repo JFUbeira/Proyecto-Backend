@@ -7,12 +7,15 @@ const router = Router()
 const productManager = new ProductManager()
 
 router.get('/api/products', async (req, res) => {
-    const { page, limit } = req.query;
+    const { page, limit, sort } = req.query;
 
     try {
+        const sortConfig = sort === 'asc' ? { price: 1 } : sort === 'desc' ? { price: -1 } : undefined;
+
         const products = await productModel.paginate({}, {
             page: page || 1,
             limit: limit || 10,
+            sort: sortConfig,
         });
 
         const response = {
@@ -24,8 +27,8 @@ router.get('/api/products', async (req, res) => {
             page: products.page,
             hasPrevPage: products.hasPrevPage,
             hasNextPage: products.hasNextPage,
-            prevLink: products.hasPrevPage ? `/api/products?page=${products.prevPage}&limit=${limit || 10}` : null,
-            nextLink: products.hasNextPage ? `/api/products?page=${products.nextPage}&limit=${limit || 10}` : null,
+            prevLink: products.hasPrevPage ? `/api/products?page=${products.prevPage}&limit=${limit || 10}&sort=${sort || ''}` : null,
+            nextLink: products.hasNextPage ? `/api/products?page=${products.nextPage}&limit=${limit || 10}&sort=${sort || ''}` : null,
         };
 
         res.json(response);
@@ -36,7 +39,11 @@ router.get('/api/products', async (req, res) => {
             message: 'Internal Server Error',
         });
     }
-})
+});
+
+
+
+
 
 router.get('/api/products/:pid', (req, res) => {
     const pid = req.params.pid
