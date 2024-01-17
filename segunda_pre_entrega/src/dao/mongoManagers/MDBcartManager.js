@@ -1,4 +1,4 @@
-import { cartModel } from './models/cart.model.js'
+import { cartModel } from '../models/cart.model.js'
 import ProductManager from './MDBproductManager.js'
 
 class CartManager {
@@ -85,7 +85,7 @@ class CartManager {
                 console.log('Error: El carrito no existe');
             } else {
                 cart.products = updatedCart;
-                await cart.save(); // Añade esta línea para guardar los cambios.
+                await cart.save()
             }
         } catch (error) {
             console.log(error);
@@ -94,7 +94,7 @@ class CartManager {
 
     async updateProductQuantity(cid, pid, quantity) {
         try {
-            console.log('New quantity:', quantity); // Agrega este log para verificar el valor de quantity
+            console.log('New quantity:', quantity)
             const cart = await cartModel.findById(cid);
             if (!cart) {
                 console.log('Error: El carrito no existe');
@@ -103,7 +103,7 @@ class CartManager {
 
                 if (productIndex !== -1) {
                     cart.products[productIndex].quantity = quantity;
-                    cart.markModified('products'); // Marca el array como modificado
+                    cart.markModified('products')
                     await cart.save();
                 } else {
                     console.log('Error: El producto no existe en el carrito');
