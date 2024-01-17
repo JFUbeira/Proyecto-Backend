@@ -116,11 +116,12 @@ router.put("/api/carts/:cid", async (req, res) => {
 router.put("/api/carts/:cid/product/:pid", async (req, res) => {
     const cid = req.params.cid;
     const pid = req.params.pid;
+    const quantity = req.body.quantity;
     try {
         const validation = await cartManager.checkIfProductExists(pid);
         if (validation) {
-            await cartManager.addProductToCart(cid, pid);
-            res.json({ status: 'success', message: 'Product added successfully' });
+            await cartManager.updateProductQuantity(cid, pid, quantity);
+            res.json({ status: 'success', message: 'Product quantity updated successfully' });
         } else {
             res.json({ status: 'error', message: 'Product not found' });
         }

@@ -94,13 +94,20 @@ class CartManager {
 
     async updateProductQuantity(cid, pid, quantity) {
         try {
+            console.log('New quantity:', quantity); // Agrega este log para verificar el valor de quantity
             const cart = await cartModel.findById(cid);
             if (!cart) {
                 console.log('Error: El carrito no existe');
             } else {
                 const productIndex = cart.products.findIndex((product) => product.product.toString() === pid);
-                cart.products[productIndex].quantity = quantity;
-                await cart.save(); // Añade esta línea para guardar los cambios.
+
+                if (productIndex !== -1) {
+                    cart.products[productIndex].quantity = quantity;
+                    cart.markModified('products'); // Marca el array como modificado
+                    await cart.save();
+                } else {
+                    console.log('Error: El producto no existe en el carrito');
+                }
             }
         } catch (error) {
             console.log(error);
