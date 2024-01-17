@@ -101,6 +101,29 @@ router.post("/api/carts", (req, res) => {
         })
 })
 
+router.put("/api/carts/:cid", async (req, res) => {
+    try {
+        const cid = req.params.cid
+        const updatedCart = req.body
+        cartManager.updateCart(cid, updatedCart)
+        res.json({ status: 'success', message: 'Cart updated successfully' })
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+router.put("/api/carts/:cid/product/:pid", async (req, res) => {
+    try {
+        const cid = req.params.cid
+        const pid = req.params.pid
+        const quantity = req.body.quantity
+        cartManager.updateProductQuantity(cid, pid, quantity)
+        res.json({ status: 'success', message: 'Product quantity updated successfully' })
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 router.get("/api/carts/:cid", (req, res) => {
     const cid = req.params.cid
     cartManager.getCartProducts(cid)
@@ -130,6 +153,34 @@ router.post("/api/carts/:cid/product/:pid", async (req, res) => {
         res.status(500).json({ status: 'error', message: 'Internal Server Error' })
     }
 })
+
+router.delete("/api/carts/:cid/product/:pid", async (req, res) => {
+    const cid = req.params.cid
+    const pid = req.params.pid
+
+    try {
+        const validation = await cartManager.checkIfProductExists(pid)
+        if (validation) {
+            await cartManager.deleteProductFromCart(cid, pid)
+            res.json({ status: 'success', message: 'Product deleted successfully' })
+        } else {
+            res.json({ status: 'error', message: 'Product not found' })
+        }
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+router.delete("/api/carts/:cid", async (req, res) => {
+    const cid = req.params.cid;
+
+    try {
+        await cartManager.deleteCart(cid);
+        res.json({ status: 'success', message: 'Cart deleted successfully' });
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 router.get('/chat', (req, res) => {
     res.render("chat", {})

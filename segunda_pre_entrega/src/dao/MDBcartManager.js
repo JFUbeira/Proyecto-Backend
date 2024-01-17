@@ -78,6 +78,33 @@ class CartManager {
         }
     }
 
+    async updateCart(cid, updatedCart) {
+        try {
+            const cart = await cartModel.findById(cid);
+            if (!cart) {
+                console.log('Error: El carrito no existe');
+            } else {
+                cart.products = updatedCart;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async updateProductQuantity(cid, pid, quantity) {
+        try {
+            const cart = await cartModel.findById(cid);
+            if (!cart) {
+                console.log('Error: El carrito no existe');
+            } else {
+                const productIndex = cart.products.findIndex((product) => product.product.toString() === pid);
+                cart.products[productIndex].quantity = quantity;
+                await cart.save();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     async checkIfProductExists(pid) {
         try {
@@ -87,6 +114,23 @@ class CartManager {
         } catch (error) {
             console.log(error);
             return false;
+        }
+    }
+
+    async deleteProductFromCart(cid, pid) {
+        try {
+            const cart = await cartModel.findById(cid);
+            cart.splice(pid, 1);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async deleteCart(cid) {
+        try {
+            await cartModel.findByIdAndDelete(cid);
+        } catch (error) {
+            console.log(error);
         }
     }
 }
