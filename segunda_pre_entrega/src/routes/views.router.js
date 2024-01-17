@@ -5,6 +5,7 @@ import { productModel } from "../dao/models/product.model.js"
 
 const router = Router()
 const productManager = new ProductManager()
+const cartManager = new CartManager()
 
 router.get('/api/products', async (req, res) => {
     const { page, limit, sort } = req.query;
@@ -41,13 +42,8 @@ router.get('/api/products', async (req, res) => {
     }
 });
 
-
-
-
-
 router.get('/api/products/:pid', (req, res) => {
     const pid = req.params.pid
-    const productManager = new ProductManager()
     productManager.getProductById(pid)
         .then(product => {
             if (!product) {
@@ -63,7 +59,6 @@ router.get('/api/products/:pid', (req, res) => {
 
 router.post('/api/products', (req, res) => {
     const product = req.body
-    const productManager = new ProductManager()
     productManager.addProduct(product)
         .then(() => {
             res.json({ status: 'success', message: 'Product added successfully' })
@@ -76,7 +71,6 @@ router.post('/api/products', (req, res) => {
 router.put('/api/products/:pid', (req, res) => {
     const pid = req.params.pid
     const updatedProduct = req.body
-    const productManager = new ProductManager()
     productManager.updateProduct(pid, updatedProduct)
         .then(() => {
             res.json({ status: 'success', message: 'Product updated successfully' })
@@ -88,7 +82,6 @@ router.put('/api/products/:pid', (req, res) => {
 
 router.delete('/api/products/:pid', (req, res) => {
     const pid = req.params.pid
-    const productManager = new ProductManager()
     productManager.deleteProduct(pid)
         .then(() => {
             res.json({ status: 'success', message: 'Product deleted successfully' })
@@ -99,7 +92,6 @@ router.delete('/api/products/:pid', (req, res) => {
 })
 
 router.post("/api/carts", (req, res) => {
-    const cartManager = new CartManager()
     cartManager.createCart()
         .then(cart => {
             res.json(cart)
@@ -111,7 +103,6 @@ router.post("/api/carts", (req, res) => {
 
 router.get("/api/carts/:cid", (req, res) => {
     const cid = req.params.cid
-    const cartManager = new CartManager()
     cartManager.getCartProducts(cid)
         .then(products => {
             res.json(products)
@@ -124,7 +115,6 @@ router.get("/api/carts/:cid", (req, res) => {
 router.post("/api/carts/:cid/product/:pid", async (req, res) => {
     const cid = req.params.cid
     const pid = req.params.pid
-    const cartManager = new CartManager()
 
     try {
         const validation = await cartManager.checkIfProductExists(pid)
