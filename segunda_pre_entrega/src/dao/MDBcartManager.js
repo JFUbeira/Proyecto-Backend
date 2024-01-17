@@ -129,14 +129,21 @@ class CartManager {
     async deleteProductFromCart(cid, pid) {
         try {
             const cart = await cartModel.findById(cid);
-            cart.products.splice(pid, 1);
+
+            if (!cart) {
+                console.log('Error: El carrito no existe');
+                return;
+            }
+
+            cart.products = cart.products.filter(product => {
+                return product && product.product && product.product.toString() !== pid;
+            });
 
             await cart.save();
         } catch (error) {
             console.log(error);
         }
     }
-
 
     async deleteCart(cid) {
         try {
