@@ -27,52 +27,52 @@ router.put("/:cid", async (req, res) => {
 })
 
 router.put("/:cid/product/:pid", async (req, res) => {
-    const cid = req.params.cid;
-    const pid = req.params.pid;
-    const quantity = req.body.quantity;
+    const cid = req.params.cid
+    const pid = req.params.pid
+    const quantity = req.body.quantity
     try {
-        const validation = await cartManager.checkIfProductExists(pid);
+        const validation = await cartManager.checkIfProductExists(pid)
         if (validation) {
-            await cartManager.updateProductQuantity(cid, pid, quantity);
-            res.json({ status: 'success', message: 'Product quantity updated successfully' });
+            await cartManager.updateProductQuantity(cid, pid, quantity)
+            res.json({ status: 'success', message: 'Product quantity updated successfully' })
         } else {
-            res.json({ status: 'error', message: 'Product not found' });
+            res.json({ status: 'error', message: 'Product not found' })
         }
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ status: 'error', message: 'Internal Server Error' });
+        console.log(error)
+        res.status(500).json({ status: 'error', message: 'Internal Server Error' })
     }
-});
-
-router.get("/:cid", (req, res) => {
-    const cid = req.params.cid
-    cartManager.getCartProducts(cid)
-        .then(products => {
-            res.json(products)
-        })
-        .catch(error => {
-            console.log(error)
-        })
 })
 
+router.get("/:cid", async (req, res) => {
+    try {
+        const cid = req.params.cid
+        const products = await cartManager.getCartProducts(cid)
+        res.json(products)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
 router.post("/:cid/product/:pid", async (req, res) => {
-    const cid = req.params.cid;
-    const pid = req.params.pid;
+    const cid = req.params.cid
+    const pid = req.params.pid
 
     try {
-        const validation = await cartManager.checkIfProductExists(pid);
+        const validation = await cartManager.checkIfProductExists(pid)
 
         if (validation) {
-            await cartManager.addProductToCart(cid, pid);
-            res.json({ status: 'success', message: 'Product added successfully' });
+            await cartManager.addProductToCart(cid, pid)
+            res.json({ status: 'success', message: 'Product added successfully' })
         } else {
-            res.json({ status: 'error', message: 'Product not found' });
+            res.json({ status: 'error', message: 'Product not found' })
         }
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ status: 'error', message: 'Internal Server Error' });
+        console.log(error)
+        res.status(500).json({ status: 'error', message: 'Internal Server Error' })
     }
-});
+})
 
 
 router.delete("/:cid/product/:pid", async (req, res) => {
@@ -93,14 +93,14 @@ router.delete("/:cid/product/:pid", async (req, res) => {
 })
 
 router.delete("/:cid", async (req, res) => {
-    const cid = req.params.cid;
+    const cid = req.params.cid
 
     try {
-        await cartManager.deleteCart(cid);
-        res.json({ status: 'success', message: 'Cart deleted successfully' });
+        await cartManager.deleteCart(cid)
+        res.json({ status: 'success', message: 'Cart deleted successfully' })
     } catch (error) {
-        console.log(error);
+        console.log(error)
     }
-});
+})
 
 export default router
