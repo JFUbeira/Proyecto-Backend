@@ -56,6 +56,19 @@ class CartManager {
         }
     }
 
+    async getPopulatedCart(id) {
+        try {
+            const populatedCart = await cartModel
+                .findById(id)
+                .populate('products.product')
+
+            return populatedCart;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
     async addProductToCart(cid, pid) {
         try {
             const cart = await cartModel.findById(cid);

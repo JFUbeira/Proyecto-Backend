@@ -47,10 +47,11 @@ router.put("/:cid/product/:pid", async (req, res) => {
 router.get("/:cid", async (req, res) => {
     try {
         const cid = req.params.cid
-        const products = await cartManager.getCartProducts(cid)
-        res.json(products)
+        const populatedCart = await cartManager.getPopulatedCart(cid)
+        res.json(populatedCart)
     } catch (error) {
         console.log(error)
+        res.status(500).json({ status: 'error', message: 'Internal Server Error' })
     }
 })
 
