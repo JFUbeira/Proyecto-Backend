@@ -85,6 +85,7 @@ class CartManager {
                 console.log('Error: El carrito no existe');
             } else {
                 cart.products = updatedCart;
+                await cart.save(); // Añade esta línea para guardar los cambios.
             }
         } catch (error) {
             console.log(error);
@@ -99,12 +100,13 @@ class CartManager {
             } else {
                 const productIndex = cart.products.findIndex((product) => product.product.toString() === pid);
                 cart.products[productIndex].quantity = quantity;
-                await cart.save();
+                await cart.save(); // Añade esta línea para guardar los cambios.
             }
         } catch (error) {
             console.log(error);
         }
     }
+
 
     async checkIfProductExists(pid) {
         try {
@@ -120,11 +122,14 @@ class CartManager {
     async deleteProductFromCart(cid, pid) {
         try {
             const cart = await cartModel.findById(cid);
-            cart.splice(pid, 1);
+            cart.products.splice(pid, 1);
+
+            await cart.save();
         } catch (error) {
             console.log(error);
         }
     }
+
 
     async deleteCart(cid) {
         try {
