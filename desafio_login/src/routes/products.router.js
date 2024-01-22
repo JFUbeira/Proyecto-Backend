@@ -6,20 +6,20 @@ const router = Router()
 const productManager = new ProductManager()
 
 router.get('/', async (req, res) => {
-    const { page, limit, sort } = req.query
+    const { page, limit, sort } = req.query;
 
     try {
-        const sortConfig = sort === 'asc' ? { price: 1 } : sort === 'desc' ? { price: -1 } : undefined
+        const sortConfig = sort === 'asc' ? { price: 1 } : sort === 'desc' ? { price: -1 } : undefined;
 
         const products = await productModel.paginate({}, {
             page: page || 1,
             limit: limit || 10,
             sort: sortConfig,
-        })
+        });
 
         const response = {
             status: 'success',
-            payload: products.docs,
+            payload: products.docs.map(product => product.toJSON()), // Utiliza map para aplicar toJSON a cada elemento
             totalPages: products.totalPages,
             prevPage: products.hasPrevPage ? products.prevPage : null,
             nextPage: products.hasNextPage ? products.nextPage : null,
@@ -28,17 +28,20 @@ router.get('/', async (req, res) => {
             hasNextPage: products.hasNextPage,
             prevLink: products.hasPrevPage ? `/api/products?page=${products.prevPage}&limit=${limit || 10}&sort=${sort || ''}` : null,
             nextLink: products.hasNextPage ? `/api/products?page=${products.nextPage}&limit=${limit || 10}&sort=${sort || ''}` : null,
-        }
+        };
 
-        res.json(response)
+        res.render('products', {
+            response
+        });
     } catch (error) {
-        console.log(error)
+        console.log(error);
         res.status(500).json({
             status: 'error',
             message: 'Internal Server Error',
-        })
+        });
     }
-})
+});
+
 
 router.get('/:pid', async (req, res) => {
     try {

@@ -1,0 +1,21 @@
+<h1>Product List</h1>
+
+<ul>
+    {{#each response.payload}}
+        <li>
+            <h3>{{title}}</h3>
+            <p>Description: {{description}}</p>
+            <p>Price: ${{price}}</p>
+        </li>
+    {{/each}}
+</ul>
+
+<div>
+    {{#if response.prevLink}}
+        <a href='{{response.prevLink}}'>Previous Page</a>
+    {{/if}}
+
+    {{#if response.nextLink}}
+        <a href='{{response.nextLink}}'>Next Page</a>
+    {{/if}}
+</div>
