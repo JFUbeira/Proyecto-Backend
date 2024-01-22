@@ -50,6 +50,9 @@ app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
 app.use('/', viewsRouter)
 
+
+// Websockets
+
 const messages = []
 
 io.on("connection", async (socket) => {
