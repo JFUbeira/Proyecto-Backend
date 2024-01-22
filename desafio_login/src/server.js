@@ -8,6 +8,8 @@ import { password, PORT, db_name } from "./env.js"
 import mongoose from "mongoose"
 import { Server } from "socket.io"
 import { messageModel } from './dao/models/message.model.js'
+import session from 'express-session'
+import MongoStore from 'connect-mongo'
 
 const app = express()
 
@@ -49,6 +51,24 @@ app.use(express.static(__dirname + "/public"))
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
 app.use('/', viewsRouter)
+
+app.use(session(
+    {
+        store: MongoStore.create({
+            mongoUrl: `mongodb+srv://JFUbeira:${password}@node-js.mkfobxo.mongodb.net/${db_name}?retryWrites=true&w=majority`,
+            mongoOptions: {
+                useNewUrlParser: true, useUnifiedTopology: true
+            },
+            ttl: 10 * 60
+        })
+
+    },
+    {
+        secret: 'secret',
+        resave: false,
+        saveUninitialized: true
+    }
+))
 
 
 // Websockets
