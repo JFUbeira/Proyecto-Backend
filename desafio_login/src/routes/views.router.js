@@ -20,6 +20,10 @@ router.get('/users', (req, res) => {
     })
 })
 
+router.get('/', (req, res) => {
+    res.render('login')
+})
+
 export default router
 
 

@@ -62,9 +62,13 @@ router.post('/login', async (req, res) => {
             email: email,
             role: 'admin'
         };
-    } else if (!user) {
+    }
+
+    else if (!user) {
         return res.status(401).send({ status: 'error', error: "Check your credentials" });
-    } else {
+    }
+
+    else {
         req.session.user = {
             name: `${user.first_name} ${user.last_name}`,
             email: user.email,
