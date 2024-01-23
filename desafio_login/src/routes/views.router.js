@@ -14,7 +14,7 @@ router.get("/api/sessions/register", (req, res) => {
     res.render('register')
 })
 
-router.get("/", (req, res) => {
+router.get('/users', (req, res) => {
     res.render('profile', {
         user: req.session.user
     })

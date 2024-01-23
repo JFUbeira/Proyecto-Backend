@@ -34,8 +34,8 @@ app.use(
         }),
         secret: 'secret',
         resave: false,
-        saveUninitialized: false, // Cambiado a false
-        cookie: { secure: false }, // Cambiado a false
+        saveUninitialized: false,
+        cookie: { secure: false },
     })
 );
 

@@ -23,7 +23,6 @@ router.post('/register', async (req, res) => {
 
     const result = await userModel.create(user);
 
-    // Guarda el usuario en la sesión después de registrarse
     req.session.user = {
         name: `${user.first_name} ${user.last_name}`,
         email: user.email,
@@ -39,7 +38,7 @@ router.get('/current-user', (req, res) => {
     } else {
         res.json({ status: 'error', message: 'No user in session' });
     }
-});
+})
 
 
 router.post('/login', async (req, res) => {
