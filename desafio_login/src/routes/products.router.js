@@ -31,7 +31,8 @@ router.get('/', async (req, res) => {
         };
 
         res.render('products', {
-            response
+            response,
+            user: req.session.user
         });
     } catch (error) {
         console.log(error);

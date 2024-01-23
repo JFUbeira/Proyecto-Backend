@@ -19,7 +19,10 @@ router.post('/register', async (req, res) => {
         email,
         age,
         password,
+        role: 'user'
     };
+
+    console.log("User object:", user);
 
     const result = await userModel.create(user);
 
@@ -27,7 +30,11 @@ router.post('/register', async (req, res) => {
         name: `${user.first_name} ${user.last_name}`,
         email: user.email,
         age: user.age,
+        role: user.role
     };
+
+    console.log("Session:", req.session.user);
+    console.log("Role", req.session.user.role);
 
     res.send({ status: "success", message: "User created successfully with ID: " + result.id });
 });
@@ -52,6 +59,7 @@ router.post('/login', async (req, res) => {
         name: `${user.first_name} ${user.last_name}`,
         email: user.email,
         age: user.age,
+        role: user.role
     };
 
     res.send({ status: 'success', payload: req.session.user, message: 'Logged in for the first time successfully' });
