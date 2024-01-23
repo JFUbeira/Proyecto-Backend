@@ -22,9 +22,9 @@ router.post('/register', async (req, res) => {
         role: 'user'
     };
 
-    if (user.email === 'adminCoder@coder.com' && user.password === 'adminCod3r123') {
-        user.role = 'admin';
-    }
+    // if (user.email === 'adminCoder@coder.com' && user.password === 'adminCod3r123') {
+    //     user.role = 'admin';
+    // }
 
     console.log("User object:", user);
 
@@ -54,17 +54,25 @@ router.get('/current-user', (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    const user = await userModel.findOne({ email, password })
+    const user = await userModel.findOne({ email, password });
 
-    if (!user) return res.status(401).send({ status: 'error', error: "Check your credentials" })
+    if (!user) return res.status(401).send({ status: 'error', error: "Check your credentials" });
 
-    req.session = req.session || {};
-    req.session.user = {
-        name: `${user.first_name} ${user.last_name}`,
-        email: user.email,
-        age: user.age,
-        role: user.role
-    };
+    if (email === 'adminCoder@coder.com' && password === 'adminCod3r123') {
+        req.session.user = {
+            name: 'admin coder',
+            email: user.email,
+            // age: user.age,
+            role: 'admin'
+        };
+    } else {
+        req.session.user = {
+            name: `${user.first_name} ${user.last_name}`,
+            email: user.email,
+            age: user.age,
+            role: user.role
+        };
+    }
 
     res.send({ status: 'success', payload: req.session.user, message: 'Logged in for the first time successfully' });
 });
