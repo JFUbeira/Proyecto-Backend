@@ -56,15 +56,14 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     const user = await userModel.findOne({ email, password });
 
-    if (!user) return res.status(401).send({ status: 'error', error: "Check your credentials" });
-
     if (email === 'adminCoder@coder.com' && password === 'adminCod3r123') {
         req.session.user = {
             name: 'admin coder',
-            email: user.email,
-            // age: user.age,
+            email: email,
             role: 'admin'
         };
+    } else if (!user) {
+        return res.status(401).send({ status: 'error', error: "Check your credentials" });
     } else {
         req.session.user = {
             name: `${user.first_name} ${user.last_name}`,
