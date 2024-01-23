@@ -69,4 +69,13 @@ router.post('/login', async (req, res) => {
     res.send({ status: 'success', payload: req.session.user, message: 'Logged in for the first time successfully' });
 });
 
+router.get('/logout', (req, res) => {
+    req.session.destroy(error => {
+        if (error) {
+            res.json({ status: 'error', message: 'Logout error' });
+        }
+    });
+    res.send({ status: 'success', message: 'Logged out successfully' });
+});
+
 export default router;
