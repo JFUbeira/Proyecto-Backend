@@ -14,6 +14,12 @@ form.addEventListener('submit', evt => {
     }).then(result => {
         if (result.status === 200) {
             window.location.replace('/api/products');
+        } else if (result.status === 401) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Check your credentials'
+            });
         }
     })
 })
