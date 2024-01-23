@@ -1,18 +1,16 @@
 import { Router } from 'express';
-import userModel from '../dao/models/user.model.js';
+import userModel from '../dao/models/user.model.js'
 
 const router = Router();
 
-// Register
 router.post('/register', async (req, res) => {
     const { first_name, last_name, email, age, password } = req.body;
-    console.log("Registrando usuario:");
+    console.log("Registering new user:");
     console.log(req.body);
 
-    //Validamos si el user existe en la DB
     const exist = await userModel.findOne({ email });
     if (exist) {
-        return res.status(400).send({ status: 'error', message: "Usuario ya existe!" })
+        return res.status(400).send({ status: 'error', message: "User already exists" });
     }
 
     const user = {
@@ -20,28 +18,44 @@ router.post('/register', async (req, res) => {
         last_name,
         email,
         age,
-        password //se encriptara despues...
-    }
+        password,
+    };
 
     const result = await userModel.create(user);
-    res.send({ status: "success", message: "Usuario creado con extito con ID: " + result.id });
-})
 
-
-// Login
-router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-    const user = await userModel.findOne({ email, password }); //Ya que el password no está hasheado, podemos buscarlo directamente
-
-    if (!user) return res.status(401).send({ status: 'error', error: "Incorrect credentials" })
-
+    // Guarda el usuario en la sesión después de registrarse
     req.session.user = {
         name: `${user.first_name} ${user.last_name}`,
         email: user.email,
-        age: user.age
-    }
+        age: user.age,
+    };
 
-    res.send({ status: "success", payload: req.session.user, message: "¡Primer logueo realizado! :)" });
-})
+    res.send({ status: "success", message: "User created successfully with ID: " + result.id });
+});
+
+router.get('/current-user', (req, res) => {
+    if (req.session.user) {
+        res.json({ status: 'success', user: req.session.user });
+    } else {
+        res.json({ status: 'error', message: 'No user in session' });
+    }
+});
+
+
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    const user = await userModel.findOne({ email, password })
+
+    if (!user) return res.status(401).send({ status: 'error', error: "Check your credentials" })
+
+    req.session = req.session || {};
+    req.session.user = {
+        name: `${user.first_name} ${user.last_name}`,
+        email: user.email,
+        age: user.age,
+    };
+
+    res.send({ status: 'success', payload: req.session.user, message: 'Logged in for the first time successfully' });
+});
 
 export default router;

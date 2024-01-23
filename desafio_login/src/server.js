@@ -10,6 +10,7 @@ import { Server } from "socket.io"
 import { messageModel } from './dao/models/message.model.js'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
+import sessionsRouter from './routes/sessions.router.js'
 
 const app = express()
 
@@ -21,6 +22,22 @@ const io = new Server(httpServer)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use(
+    session({
+        store: MongoStore.create({
+            mongoUrl: `mongodb+srv://JFUbeira:${password}@node-js.mkfobxo.mongodb.net/${db_name}?retryWrites=true&w=majority`,
+            mongoOptions: {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            },
+        }),
+        secret: 'secret',
+        resave: false,
+        saveUninitialized: false, // Cambiado a false
+        cookie: { secure: false }, // Cambiado a false
+    })
+);
 
 mongoose
     .connect(
@@ -50,25 +67,8 @@ app.use(express.static(__dirname + "/public"))
 
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
+app.use('/api/sessions', sessionsRouter)
 app.use('/', viewsRouter)
-
-app.use(session(
-    {
-        store: MongoStore.create({
-            mongoUrl: `mongodb+srv://JFUbeira:${password}@node-js.mkfobxo.mongodb.net/${db_name}?retryWrites=true&w=majority`,
-            mongoOptions: {
-                useNewUrlParser: true, useUnifiedTopology: true
-            },
-            ttl: 10 * 60
-        })
-
-    },
-    {
-        secret: 'secret',
-        resave: false,
-        saveUninitialized: true
-    }
-))
 
 
 // Websockets
