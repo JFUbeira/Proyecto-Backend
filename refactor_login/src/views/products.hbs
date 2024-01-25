@@ -1,0 +1,27 @@
+<h2>Bienvenido {{user.name}}</h2>
+<h3>Rol: {{user.role}}</h3>
+<button id='logout'>Logout</button>
+
+<h1>Product List</h1>
+
+<ul>
+    {{#each response.payload}}
+        <li>
+            <h3>{{title}}</h3>
+            <p>Description: {{description}}</p>
+            <p>Price: ${{price}}</p>
+        </li>
+    {{/each}}
+</ul>
+
+<div>
+    {{#if response.prevLink}}
+        <a href='{{response.prevLink}}'>Previous Page</a>
+    {{/if}}
+
+    {{#if response.nextLink}}
+        <a href='{{response.nextLink}}'>Next Page</a>
+    {{/if}}
+</div>
+
+<script src='/js/logout.js'></script>

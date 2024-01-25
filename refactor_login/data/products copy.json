@@ -1,0 +1,502 @@
+[
+    {
+        "title": "Producto 1",
+        "description": "Descripción del producto 1",
+        "code": 1234,
+        "price": 27,
+        "category": "winter",
+        "stock": 86,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 2",
+        "description": "Descripción del producto 2",
+        "code": 5678,
+        "price": 72,
+        "category": "summer",
+        "stock": 54,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 3",
+        "description": "Descripción del producto 3",
+        "code": 9012,
+        "price": 41,
+        "category": "winter",
+        "stock": 12,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 4",
+        "description": "Descripción del producto 4",
+        "code": 3456,
+        "price": 55,
+        "category": "summer",
+        "stock": 73,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 5",
+        "description": "Descripción del producto 5",
+        "code": 7890,
+        "price": 16,
+        "category": "winter",
+        "stock": 32,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 6",
+        "description": "Descripción del producto 6",
+        "code": 2345,
+        "price": 92,
+        "category": "summer",
+        "stock": 67,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 7",
+        "description": "Descripción del producto 7",
+        "code": 6789,
+        "price": 19,
+        "category": "winter",
+        "stock": 89,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 8",
+        "description": "Descripción del producto 8",
+        "code": 3123,
+        "price": 43,
+        "category": "summer",
+        "stock": 45,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 9",
+        "description": "Descripción del producto 9",
+        "code": 4567,
+        "price": 69,
+        "category": "winter",
+        "stock": 21,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 10",
+        "description": "Descripción del producto 10",
+        "code": 8901,
+        "price": 88,
+        "category": "summer",
+        "stock": 97,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 11",
+        "description": "Descripción del producto 11",
+        "code": 10011,
+        "price": 61,
+        "category": "winter",
+        "stock": 61,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 12",
+        "description": "Descripción del producto 12",
+        "code": 10012,
+        "price": 62,
+        "category": "summer",
+        "stock": 62,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 13",
+        "description": "Descripción del producto 13",
+        "code": 10013,
+        "price": 63,
+        "category": "winter",
+        "stock": 63,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 14",
+        "description": "Descripción del producto 14",
+        "code": 10014,
+        "price": 64,
+        "category": "summer",
+        "stock": 64,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 15",
+        "description": "Descripción del producto 15",
+        "code": 10015,
+        "price": 65,
+        "category": "winter",
+        "stock": 65,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 16",
+        "description": "Descripción del producto 16",
+        "code": 10016,
+        "price": 66,
+        "category": "summer",
+        "stock": 66,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 17",
+        "description": "Descripción del producto 17",
+        "code": 10017,
+        "price": 67,
+        "category": "winter",
+        "stock": 67,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 18",
+        "description": "Descripción del producto 18",
+        "code": 10018,
+        "price": 68,
+        "category": "summer",
+        "stock": 68,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 19",
+        "description": "Descripción del producto 19",
+        "code": 10019,
+        "price": 69,
+        "category": "winter",
+        "stock": 69,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 20",
+        "description": "Descripción del producto 20",
+        "code": 10020,
+        "price": 70,
+        "category": "summer",
+        "stock": 70,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 21",
+        "description": "Descripción del producto 21",
+        "code": 10021,
+        "price": 71,
+        "category": "winter",
+        "stock": 71,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 22",
+        "description": "Descripción del producto 22",
+        "code": 10022,
+        "price": 72,
+        "category": "summer",
+        "stock": 72,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 23",
+        "description": "Descripción del producto 23",
+        "code": 10023,
+        "price": 73,
+        "category": "winter",
+        "stock": 73,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 24",
+        "description": "Descripción del producto 24",
+        "code": 10024,
+        "price": 74,
+        "category": "summer",
+        "stock": 74,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 25",
+        "description": "Descripción del producto 25",
+        "code": 10025,
+        "price": 75,
+        "category": "winter",
+        "stock": 75,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 26",
+        "description": "Descripción del producto 26",
+        "code": 10026,
+        "price": 76,
+        "category": "summer",
+        "stock": 76,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 27",
+        "description": "Descripción del producto 27",
+        "code": 10027,
+        "price": 77,
+        "category": "winter",
+        "stock": 77,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 28",
+        "description": "Descripción del producto 28",
+        "code": 10028,
+        "price": 78,
+        "category": "summer",
+        "stock": 78,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 29",
+        "description": "Descripción del producto 29",
+        "code": 10029,
+        "price": 79,
+        "category": "winter",
+        "stock": 79,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 30",
+        "description": "Descripción del producto 30",
+        "code": 10030,
+        "price": 80,
+        "category": "summer",
+        "stock": 80,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 31",
+        "description": "Descripción del producto 31",
+        "code": 10031,
+        "price": 81,
+        "category": "winter",
+        "stock": 81,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 32",
+        "description": "Descripción del producto 32",
+        "code": 10032,
+        "price": 82,
+        "category": "summer",
+        "stock": 82,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 33",
+        "description": "Descripción del producto 33",
+        "code": 10033,
+        "price": 83,
+        "category": "winter",
+        "stock": 83,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 34",
+        "description": "Descripción del producto 34",
+        "code": 10034,
+        "price": 84,
+        "category": "summer",
+        "stock": 84,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 35",
+        "description": "Descripción del producto 35",
+        "code": 10035,
+        "price": 85,
+        "category": "winter",
+        "stock": 85,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 36",
+        "description": "Descripción del producto 36",
+        "code": 10036,
+        "price": 86,
+        "category": "summer",
+        "stock": 86,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 37",
+        "description": "Descripción del producto 37",
+        "code": 10037,
+        "price": 87,
+        "category": "winter",
+        "stock": 87,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 38",
+        "description": "Descripción del producto 38",
+        "code": 10038,
+        "price": 88,
+        "category": "summer",
+        "stock": 88,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 39",
+        "description": "Descripción del producto 39",
+        "code": 10039,
+        "price": 89,
+        "category": "winter",
+        "stock": 89,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 40",
+        "description": "Descripción del producto 40",
+        "code": 10040,
+        "price": 90,
+        "category": "summer",
+        "stock": 90,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 41",
+        "description": "Descripción del producto 41",
+        "code": 10041,
+        "price": 91,
+        "category": "winter",
+        "stock": 91,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 42",
+        "description": "Descripción del producto 42",
+        "code": 10042,
+        "price": 92,
+        "category": "summer",
+        "stock": 92,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 43",
+        "description": "Descripción del producto 43",
+        "code": 10043,
+        "price": 93,
+        "category": "winter",
+        "stock": 93,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 44",
+        "description": "Descripción del producto 44",
+        "code": 10044,
+        "price": 94,
+        "category": "summer",
+        "stock": 94,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 45",
+        "description": "Descripción del producto 45",
+        "code": 10045,
+        "price": 95,
+        "category": "winter",
+        "stock": 95,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 46",
+        "description": "Descripción del producto 46",
+        "code": 10046,
+        "price": 96,
+        "category": "summer",
+        "stock": 96,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 47",
+        "description": "Descripción del producto 47",
+        "code": 10047,
+        "price": 97,
+        "category": "winter",
+        "stock": 97,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 48",
+        "description": "Descripción del producto 48",
+        "code": 10048,
+        "price": 98,
+        "category": "summer",
+        "stock": 98,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 49",
+        "description": "Descripción del producto 49",
+        "code": 10049,
+        "price": 99,
+        "category": "winter",
+        "stock": 99,
+        "thumbnail": "sin imagen",
+        "status": true
+    },
+    {
+        "title": "Producto 50",
+        "description": "Descripción del producto 50",
+        "code": 10050,
+        "price": 100,
+        "category": "summer",
+        "stock": 100,
+        "thumbnail": "sin imagen",
+        "status": true
+    }
+]
