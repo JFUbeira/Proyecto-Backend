@@ -13,6 +13,7 @@ import MongoStore from 'connect-mongo'
 import sessionsRouter from './routes/sessions.router.js'
 import passport from 'passport'
 import initializePassport from './config/passport.config.js'
+import githubLoginRouter from './routes/github-login.views.router.js'
 
 const app = express()
 
@@ -74,6 +75,7 @@ app.use(passport.session())
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
 app.use('/api/sessions', sessionsRouter)
+app.use('/github', githubLoginRouter)
 app.use('/', viewsRouter)
 
 
