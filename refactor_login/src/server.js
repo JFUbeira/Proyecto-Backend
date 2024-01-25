@@ -11,6 +11,8 @@ import { messageModel } from './dao/models/message.model.js'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import sessionsRouter from './routes/sessions.router.js'
+import passport from 'passport'
+import initializePassport from './config/passport.config.js'
 
 const app = express()
 
@@ -64,6 +66,10 @@ app.set("view engine", "hbs")
 app.set("views", __dirname + "/views")
 
 app.use(express.static(__dirname + "/public"))
+
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)

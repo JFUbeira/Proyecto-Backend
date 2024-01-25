@@ -12,6 +12,46 @@ router.post('/register', passport.authenticate('register', {
     res.status(201).send({ status: "success", message: "User created successfully" })
 })
 
+router.post('/login', passport.authenticate('login',
+    {
+        failureRedirect: 'api/session/fail-login'
+    }
+), async (req, res) => {
+    console.log("User found to login:")
+
+    const user = req.user
+    console.log(user)
+
+    req.session.user = {
+        name: `${user.first_name} ${user.last_name}`,
+        email: user.email,
+        age: user.age,
+        role: user.role
+    }
+
+    res.send({ status: "success", payload: req.session.user, message: "Logged in for the first time successfully" })
+})
+
+router.get("/fail-register", (req, res) => {
+    res.status(401).send({ error: "Failed to process register!" })
+})
+
+router.get("/fail-login", (req, res) => {
+    res.status(401).send({ error: "Failed to process login!" })
+})
+
+router.get('/logout', (req, res) => {
+    req.session.destroy(error => {
+        if (error) {
+            res.json({ status: 'error', message: 'Logout error' })
+        }
+    })
+    res.send({ status: 'success', message: 'Logged out successfully' })
+})
+
+export default router
+
+
 // router.post('/register', async (req, res) => {
 //     const { first_name, last_name, email, age, password } = req.body
 
@@ -41,25 +81,6 @@ router.post('/register', passport.authenticate('register', {
 //     res.send({ status: "success", message: "User created successfully with ID: " + result.id })
 // })
 
-router.post('/login', passport.authenticate('login',
-    {
-        failureRedirect: 'api/session/fail-login'
-    }
-), async (req, res) => {
-    console.log("User found to login:")
-
-    const user = req.user
-    console.log(user)
-
-    req.session.user = {
-        name: `${user.first_name} ${user.last_name}`,
-        email: user.email,
-        age: user.age,
-        role: user.role
-    }
-
-    res.send({ status: "success", payload: req.session.user, message: "Logged in for the first time successfully" })
-})
 
 // router.post('/login', async (req, res) => {
 //     const { email, password } = req.body
@@ -92,22 +113,3 @@ router.post('/login', passport.authenticate('login',
 
 //     res.send({ status: 'success', payload: req.session.user, message: 'Logged in for the first time successfully' })
 // })
-
-router.get("/fail-register", (req, res) => {
-    res.status(401).send({ error: "Failed to process register!" })
-})
-
-router.get("/fail-login", (req, res) => {
-    res.status(401).send({ error: "Failed to process login!" })
-})
-
-router.get('/logout', (req, res) => {
-    req.session.destroy(error => {
-        if (error) {
-            res.json({ status: 'error', message: 'Logout error' })
-        }
-    })
-    res.send({ status: 'success', message: 'Logged out successfully' })
-})
-
-export default router
