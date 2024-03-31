@@ -9,6 +9,19 @@ program
     .option('--mode <mode>', 'Work mode', 'dev')
 program.parse()
 
-console.log('Mode options: ', program.opt().mode)
+console.log('Mode options: ', program.opts().mode)
 
-dotenv.config()
+const environment = program.opts().mode
+
+dotenv.config(
+    {
+        path: environment === 'prod' ? './src/config/.env.production' : './src/config/.env.development'
+    }
+)
+
+export default {
+    port: process.env.PORT,
+    mongoURL: process.env.MONGO_URL,
+    adminName: process.env.ADMIN_NAME,
+    adminPassword: process.env.ADMIN_PASSWORD
+}
