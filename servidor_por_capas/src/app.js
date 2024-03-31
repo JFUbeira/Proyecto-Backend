@@ -16,6 +16,10 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 // routes declaration 
+app.use('/api/users', usersRouter)
+app.use('/api/products', productsRouter)
+app.use('/api/carts', cartsRouter)
+
 const server_port = config.port
 app.listen(server_port, () => {
     console.log(`Server running on port ${server_port}`)
