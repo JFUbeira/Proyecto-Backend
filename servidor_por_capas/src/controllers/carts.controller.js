@@ -1,4 +1,4 @@
-import CartService from "../services/dao/cart.dao.js"
+import CartService from "../services/dao/mongoManagers/MDBcartManager.js"
 
 const cartService = new CartService()
 
@@ -77,6 +77,17 @@ export const deleteCart = async (req, res) => {
         const cid = req.params.cid
         await cartService.deleteCart(cid)
         res.json({ status: 'success', message: 'Cart deleted successfully' })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ status: 'error', message: 'Internal Server Error' })
+    }
+}
+
+export const getPopulatedCart = async (req, res) => {
+    try {
+        const cid = req.params.cid
+        const populatedCart = await cartService.getPopulatedCart(cid)
+        res.json(populatedCart)
     } catch (error) {
         console.log(error)
         res.status(500).json({ status: 'error', message: 'Internal Server Error' })

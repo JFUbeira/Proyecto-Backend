@@ -1,4 +1,4 @@
-import UserService from '../services/dao/user.dao.js'
+import UserService from '../services/dao/mongoManagers/MDBuserManager.js'
 import passport from 'passport'
 
 const userService = new UserService()
@@ -89,4 +89,3 @@ export const githubAuthCallbackHandler = async (req, res) => {
     }
 };
 
-export default router

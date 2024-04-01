@@ -3,9 +3,10 @@ import config from './config/config.js'
 import MongoSingleton from './config/mongodb-singleton.js'
 import cors from 'cors'
 import passport from 'passport'
+import initializePassport from './config/passport.config.js'
 
 // import Routers
-import usersRouter from './routers/users.router.js'
+// import usersRouter from './routers/users.router.js'
 import productsRouter from './routers/products.router.js'
 import cartsRouter from './routers/carts.router.js'
 import sessionsRouter from './routers/sessions.router.js'

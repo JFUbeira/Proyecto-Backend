@@ -1,4 +1,4 @@
-import ProductsService from "../services/dao/products.dao.js"
+import ProductsService from "../services/dao/mongoManagers/MDBproductManager.js"
 
 const productsService = new ProductsService()
 
