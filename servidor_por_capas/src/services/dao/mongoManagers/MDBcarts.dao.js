@@ -1,5 +1,5 @@
-import { cartModel } from '../models/cart.model.js'
-import ProductManager from './MDBproductManager.js'
+import { cartModel } from '../../models/cart.model.js'
+import ProductManager from './MDBproducts.dao.js'
 
 class CartManager {
     async readCarts() {

@@ -1,4 +1,4 @@
-import CartService from "../services/dao/mongoManagers/MDBcartManager.js"
+import CartService from "../services/dao/mongoManagers/MDBcarts.dao.js"
 
 const cartService = new CartService()
 

@@ -1,5 +1,7 @@
 import express from 'express'
+import session from 'express-session'
 import config from './config/config.js'
+import MongoStore from 'connect-mongo'
 import MongoSingleton from './config/mongodb-singleton.js'
 import cors from 'cors'
 import passport from 'passport'
@@ -18,6 +20,19 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
+// session settings
+app.use(
+    session({
+        store: MongoStore.create({
+            mongoUrl: config.mongoURL,
+        }),
+        secret: 'secret',
+        resave: false,
+        saveUninitialized: false,
+        cookie: { secure: false },
+    })
+);
+
 // passport settings
 initializePassport()
 app.use(passport.initialize())
@@ -27,7 +42,7 @@ app.use(passport.session())
 // app.use('/api/users', usersRouter)
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
-app.use('/api/session', sessionsRouter)
+app.use('/api/sessions', sessionsRouter)
 
 const server_port = config.port
 app.listen(server_port, () => {
@@ -43,3 +58,5 @@ const mongoInstance = async () => {
         console.error(err)
     }
 }
+
+mongoInstance()

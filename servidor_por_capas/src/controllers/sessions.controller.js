@@ -1,4 +1,4 @@
-import UserService from '../services/dao/mongoManagers/MDBuserManager.js'
+import UserService from '../services/dao/mongoManagers/MDBusers.dao.js'
 import passport from 'passport'
 
 const userService = new UserService()
