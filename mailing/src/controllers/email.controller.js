@@ -48,15 +48,14 @@ export const sendEmail = async (req, res) => {
         let result = transporter.sendMail(mailOptions, (err, info) => {
             if (err) {
                 console.log(err)
-                res.status(500).send({ error: err })
-            } else {
-                console.log('Message sent: ' + info.messageId)
-                res.status(200).send({ message: 'Email sent: ' + info })
+                res.status(500).send({ message: 'Error sending email', payload: err })
             }
+            console.log('Message sent: %s', + info.messageId)
+            res.send({ message: 'Success', payload: info })
         })
     } catch (error) {
         console.log(error)
-        res.status(500).send({ error: error })
+        res.status(500).send({ error: error, message: 'Error sending email' })
     }
 }
 
