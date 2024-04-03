@@ -13,7 +13,7 @@ import productsRouter from './routers/products.router.js'
 import cartsRouter from './routers/carts.router.js'
 import sessionsRouter from './routers/sessions.router.js'
 import emailRouter from './routers/email.router.js'
-import smsRouter from './routers/sms.router.js'
+// import smsRouter from './routers/sms.router.js'
 
 const app = express()
 
@@ -46,7 +46,7 @@ app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/api/sessions', sessionsRouter)
 app.use('/api/email', emailRouter)
-app.use('/api/sms', smsRouter)
+// app.use('/api/sms', smsRouter)
 
 const server_port = config.port
 app.listen(server_port, () => {
