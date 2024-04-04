@@ -8,11 +8,12 @@ import passport from 'passport'
 import initializePassport from './config/passport.config.js'
 
 // import Routers
-// import usersRouter from './routers/users.router.js'
 import productsRouter from './routers/products.router.js'
 import cartsRouter from './routers/carts.router.js'
 import sessionsRouter from './routers/sessions.router.js'
 import emailRouter from './routers/email.router.js'
+import mockRouter from './routers/mock.router.js'
+// import usersRouter from './routers/users.router.js'
 // import smsRouter from './routers/sms.router.js'
 
 const app = express()
@@ -41,11 +42,12 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // routes declaration 
-// app.use('/api/users', usersRouter)
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/api/sessions', sessionsRouter)
 app.use('/api/email', emailRouter)
+app.use('/api/mockingproducts', mockRouter)
+// app.use('/api/users', usersRouter)
 // app.use('/api/sms', smsRouter)
 
 const server_port = config.port
