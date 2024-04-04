@@ -16,6 +16,8 @@ import mockRouter from './routers/mock.router.js'
 // import usersRouter from './routers/users.router.js'
 // import smsRouter from './routers/sms.router.js'
 
+import { addLogger } from './utils/baseLogger.js'
+
 const app = express()
 
 // JSON settings and middlewares
