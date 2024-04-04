@@ -1,6 +1,6 @@
 import { generateProduct } from '../utils/utils.js'
 
-export const getProducts = async (req, res) => {
+export const getMockProducts = async (req, res) => {
     try {
         const page = req.query.page ? parseInt(req.query.page) : 1;
         const pageSize = 10;

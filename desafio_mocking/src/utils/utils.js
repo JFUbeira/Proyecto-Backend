@@ -30,10 +30,10 @@ export const generateProduct = () => ({
     id: faker.database.mongodbObjectId(),
     title: faker.commerce.productName(),
     description: faker.lorem.words(),
-    price: faker.datatype.float({ min: 1, max: 1000, precision: 2 }),
-    image: faker.image.image(),
-    code: faker.datatype.uuid(),
-    stock: faker.datatype.number({ min: 0, max: 100 }),
+    price: faker.number.float({ min: 1, max: 1000, multipleOf: 2 }),
+    image: faker.image.url(),
+    code: faker.string.uuid(),
+    stock: faker.number.int({ min: 0, max: 100 }),
     category: faker.commerce.department(),
 });
 
