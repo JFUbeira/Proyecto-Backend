@@ -26,14 +26,14 @@ const __dirname = dirname(__filename)
 //     }
 // }
 
-export const generateProduct = () => {
-    return {
-        title: faker.commerce.productName(),
-        price: faker.commerce.price(),
-        stock: faker.random.numeric(1),
-        id: faker.database.mongodbObjectId(),
-        image: faker.image.image()
-    }
-}
+export const generateProduct = () => ({
+    title: faker.commerce.productName(),
+    description: faker.lorem.words(),
+    price: faker.datatype.float({ min: 1, max: 1000, precision: 2 }),
+    thumbnail: faker.image.imageUrl(),
+    code: faker.datatype.uuid(),
+    stock: faker.datatype.number({ min: 0, max: 100 }),
+    category: faker.commerce.department(),
+});
 
 export default __dirname
