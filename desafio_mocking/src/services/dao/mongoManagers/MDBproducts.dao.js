@@ -44,12 +44,45 @@ class ProductManager {
         }
     }
 
-    async getProducts() {
+    // async getProducts() {
+    //     try {
+    //         const products = await this.readProducts();
+    //         return products;
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
+    async getProducts(req, res) {
+        const { page, limit, sort } = req.query
+
         try {
-            const products = await this.readProducts();
-            return products;
+            const sortConfig = sort === 'asc' ? { price: 1 } : sort === 'desc' ? { price: -1 } : undefined
+            const products = await productModel.paginate({}, {
+                page: page || 1,
+                limit: limit || 10,
+                sort: sortConfig,
+            })
+
+            return {
+                status: 'success',
+                payload: products.docs,
+                totalPages: products.totalPages,
+                prevPage: products.hasPrevPage ? products.prevPage : null,
+                nextPage: products.hasNextPage ? products.nextPage : null,
+                page: products.page,
+                hasPrevPage: products.hasPrevPage,
+                hasNextPage: products.hasNextPage,
+                prevLink: products.hasPrevPage ? `/api/products?page=${products.prevPage}&limit=${limit || 10}&sort=${sort || ''}` : null,
+                nextLink: products.hasNextPage ? `/api/products?page=${products.nextPage}&limit=${limit || 10}&sort=${sort || ''}` : null,
+            }
+
         } catch (error) {
-            console.log(error);
+            console.log(error)
+            res.status(500).json({
+                status: 'error',
+                message: 'Internal Server Error',
+            })
         }
     }
 

@@ -4,7 +4,7 @@ const productsService = new ProductsService()
 
 export const getProducts = async (req, res) => {
     try {
-        const products = await productsService.getProducts()
+        const products = await productsService.getProducts(req, res)
         res.send({ message: "Products list", payload: products })
     } catch (error) {
         console.log(error);

@@ -27,10 +27,11 @@ const __dirname = dirname(__filename)
 // }
 
 export const generateProduct = () => ({
+    id: faker.database.mongodbObjectId(),
     title: faker.commerce.productName(),
     description: faker.lorem.words(),
     price: faker.datatype.float({ min: 1, max: 1000, precision: 2 }),
-    thumbnail: faker.image.imageUrl(),
+    image: faker.image.image(),
     code: faker.datatype.uuid(),
     stock: faker.datatype.number({ min: 0, max: 100 }),
     category: faker.commerce.department(),
