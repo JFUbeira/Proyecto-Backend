@@ -3,4 +3,5 @@
 - Custom error dictionary
 - Custom logger
 - Apply winston for logging
-- Ticker model
+- Ticket model
+- Repository: Router -> Controller -> Service -> Repository -> DAO
