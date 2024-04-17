@@ -1,0 +1,7 @@
+- Views
+- Sessions / Users
+- Custom error dictionary
+- Custom logger
+- Apply winston for logging
+- Ticket model
+- Repository: Router -> Controller -> Service -> Repository -> DAO
