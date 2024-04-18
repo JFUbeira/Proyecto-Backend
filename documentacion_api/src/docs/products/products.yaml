@@ -1,0 +1,13 @@
+paths: 
+  /api/products:
+    get:
+      summary: Get all products
+      tags:
+        - Products
+      responses:
+        200:
+          description: Got all products successfully
+        400:
+          description: Sent invalid data
+        500:
+          description: Internal server error
